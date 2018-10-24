@@ -40,13 +40,13 @@ EXAMPLES:
 
 """
 # ===imports======================
-from __future__ import print_function
+
 
 import os
 import sys
 import datetime
 import operator
-import tappy_lib
+from . import tappy_lib
 
 import baker
 
@@ -56,8 +56,8 @@ import astronomia.calendar as cal
 
 from scipy.optimize import leastsq
 from numpy import pad
-from tappy_lib.parameter_database import _master_speed_dict, letter_to_factor_map
-from tappy_lib import sparser
+from .tappy_lib.parameter_database import _master_speed_dict, letter_to_factor_map
+from .tappy_lib import sparser
 
 # ===globals======================
 modname = "tappy"

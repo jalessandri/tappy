@@ -1,3 +1,3 @@
-import filter
-import sparser
-import parameter_database
+from . import filter
+from . import sparser
+from . import parameter_database

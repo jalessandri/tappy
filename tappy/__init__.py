@@ -10,4 +10,4 @@ __license__ = 'GPLv2'
 __maintainer__ = 'Tim Cera'
 __email__ = 'tim@cerazone.net'
 
-import tappy
+from . import tappy
