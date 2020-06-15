@@ -1710,20 +1710,20 @@ def TAPPY(data, noisy=False):
     include_inferred = True
 
     # Create a tappy object.
-    x = tappy.tappy(outputts=outputts,
-                    outputxml=outputxml,
-                    quiet=quiet,
-                    debug=debug,
-                    ephemeris=ephemeris,
-                    rayleigh=rayleigh,
-                    print_vau_table=print_vau_table,
-                    missing_data=missing_data,
-                    linear_trend=linear_trend,
-                    remove_extreme=remove_extreme,
-                    zero_ts=zero_ts,
-                    filter=filter,
-                    pad_filters=pad_filters,
-                    include_inferred=include_inferred)
+    x = tappy(outputts=outputts,
+              outputxml=outputxml,
+              quiet=quiet,
+              debug=debug,
+              ephemeris=ephemeris,
+              rayleigh=rayleigh,
+              print_vau_table=print_vau_table,
+              missing_data=missing_data,
+              linear_trend=linear_trend,
+              remove_extreme=remove_extreme,
+              zero_ts=zero_ts,
+              filter=filter,
+              pad_filters=pad_filters,
+              include_inferred=include_inferred)
 
     # Add the time series to the TAPPY object
     x.dates = []
@@ -1763,7 +1763,7 @@ def TAPPY(data, noisy=False):
     klist = [i[0] for i in x.sortbyvalue(ndict)]
     for i in klist:
         cName.append(i)
-        cSpeed.append(x.speed_dict[i]['speed'] * tappy.rad2deg)
+        cSpeed.append(x.speed_dict[i]['speed'] * rad2deg)
         cPhase.append(x.phase[i])
         cAmplitude.append(x.r[i])
         cInference.append(False)
@@ -1775,7 +1775,7 @@ def TAPPY(data, noisy=False):
     klist = [i[0] for i in x.sortbyvalue(ndict)]
     for i in klist:
         cName.append(i)
-        cSpeed.append(x.tidal_dict[i]['speed'] * tappy.rad2deg)
+        cSpeed.append(x.tidal_dict[i]['speed'] * rad2deg)
         cPhase.append(x.inferred_phase[i])
         cAmplitude.append(x.inferred_r[i])
         cInference.append(True)
