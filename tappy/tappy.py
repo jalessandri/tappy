@@ -969,7 +969,7 @@ class tappy(Util):
             start = dates[0]
             # Dominant interval
             interval.sort()
-            interval = interval[len(interval)/2]
+            interval = interval[len(interval)//2]
 
             dt = dates[0]
             dates_filled = []
