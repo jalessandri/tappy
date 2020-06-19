@@ -1274,8 +1274,17 @@ class tappy(Util):
                 3) cosine-Lanczos squared filter
                 4) cosine-Lanczos filter
             """
-            import filter
+            from .tappy_lib import filter
             return dates_filled, filter.fft_lowpass(nelevation, 1 / 30.0, 1 / 40.0)
+
+        if nstype == 'notch':
+            """
+            Considering the work of Forbes (1988), 'Fourier transform: a cautionary note',
+            a notch filter is considered with two Tukey window going smoothly to 0 at diurnal
+            and semi-diurnal tides frequencies. 
+            """ 
+            from .tappy_lib import filter
+            return dates_filled, filter.fft_2bands(nelevation, 1 / 20.0, 1 / 30.0, 1 / 11.2, 1/13.5)           
 
         if nstype == 'kalman':
             # I threw this in from an example on scipy's web site.  I will keep
@@ -1996,10 +2005,10 @@ if __name__ == '__main__':
         :param remove_extreme: Remove values outside of 2 standard deviations
             before analysis.
         :param zero_ts: Zero the input time series before constituent analysis
-            by subtracting filtered data. One of: transform,usgs,doodson,boxcar
+            by subtracting filtered data. One of: transform,notch,usgs,doodson,boxcar
         :param filter:  Filter input data set with tide elimination filters. The
             -o outputts option is implied. Any mix separated by commas and no
-            spaces: transform,usgs,doodson,boxcar
+            spaces: transform,notch,usgs,doodson,boxcar
         :param pad_filters: Pad input data set with values to return same size
             after filtering.  Realize edge effects are unavoidable.  One of
             ["tide", "minimum", "maximum", "mean", "median", "reflect", "wrap"]
@@ -2109,7 +2118,7 @@ if __name__ == '__main__':
 
         if x.filter:
             for item in x.filter.split(','):
-                if item in ['mstha', 'wavelet', 'cd', 'boxcar', 'usgs', 'doodson', 'lecolazet1', 'kalman', 'transform']:# 'lecolazet', 'godin', 'sfa']:
+                if item in ['mstha', 'wavelet', 'cd', 'boxcar', 'usgs', 'doodson', 'lecolazet1', 'kalman', 'transform', 'notch']:# 'lecolazet', 'godin', 'sfa']:
                     filtered_dates, result = x.filters(item,
                                                        x.dates,
                                                        x.elevation)
